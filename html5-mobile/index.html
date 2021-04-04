@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>dino jump</title>
+	<meta charset="utf-8" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+		name="viewport" />
+    <style>
+    *{
+      margin:0;
+      padding:0;
+    }
+    </style>
+</head>
+
+<body>
+	<canvas id="game"></canvas>
+	<script>
+		function loadScript(url, callback) {
+			var script = document.createElement("script");
+			script.type = "text/javascript"
+			if (script.readyState) {
+				script.onreadystatechange = function () {
+					if (script.readyState == "loaded" || script.readyState == "complete") {
+						script.onreadystatechange = null
+						callback()
+					}
+				}
+			} else {
+				script.onload = function () {
+					callback()
+				}
+			}
+			
+			script.src = url+'?'+Date.now()
+			document.getElementsByTagName("head")[0].appendChild(script)
+		}
+		loadScript("js/jquery-1.11.2.min.js", function () {
+			loadScript("js/background.js", function () {
+				loadScript("js/sprite.js", function () {
+					loadScript("js/cactus.js", function () {
+						loadScript("js/app.js", function () {
+							new Game({
+								el: document.getElementById("game")
+							});
+						})
+					})
+				})
+			})
+		})
+	</script>
+</body>
+</html>
